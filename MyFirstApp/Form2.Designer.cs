@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Windows.Forms;
 
 namespace MyFirstApp
 {
@@ -29,18 +30,10 @@ namespace MyFirstApp
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        
+
         private void InitializeComponent()
         {
-            using (FileStream fstream = File.OpenRead(@"D:\Test\"))
-            {
-                // преобразуем строку в байты
-                byte[] array = new byte[fstream.Length];
-                // считываем данные
-                fstream.Read(array, 0, array.Length);
-                // декодируем байты в строку
-                string textFromFile = System.Text.Encoding.Default.GetString(array);
-                Console.WriteLine("Текст из файла: {0}", textFromFile);
-            }
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -50,12 +43,12 @@ namespace MyFirstApp
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -143,14 +136,23 @@ namespace MyFirstApp
             this.textBox3.Size = new System.Drawing.Size(146, 20);
             this.textBox3.TabIndex = 2;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(24, 43);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "ШАРА ССТ";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(24, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "IP-адресс для ТУ";
+            this.label2.Text = "IP-адресс для ССТ";
             // 
             // button2
             // 
@@ -160,6 +162,7 @@ namespace MyFirstApp
             this.button2.TabIndex = 3;
             this.button2.Text = "Сохранить";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -185,18 +188,8 @@ namespace MyFirstApp
             // 
             this.textBox5.Location = new System.Drawing.Point(148, 40);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Text = @"d:\test\rabis.mod\";
             this.textBox5.Size = new System.Drawing.Size(146, 20);
             this.textBox5.TabIndex = 4;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 43);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "ШАРА ССТ";
             // 
             // Form2
             // 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Management;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -83,6 +84,43 @@ namespace MyFirstApp
         //    this.Close();
         //}
 
+        
+
+        static bool MapDriveSST()
+        {
+            Form2 newForm = new Form2();
+            NamePass auth = new NamePass();
+
+            auth.ShowDialog();
+            bool cancel = auth.cancel;
+            if (!cancel)
+            {
+                String cmdString = "net use  \\\\" + newForm.GetIPSST() + "\\"+newForm.GetShareSST()  +" /user:" + auth.GetName() + " " + auth.GetPass();
+                MessageBox.Show(cmdString);
+                ManagementClass processClass = new ManagementClass("Win32_Process");
+                object[] methodArgs = { cmdString, null, null, 0 };
+                object result = processClass.InvokeMethod("Create", methodArgs);
+            }
+            return cancel;
+        }
+        static bool MapDriveTU()
+        {
+            Form2 newForm = new Form2();
+            NamePass auth = new NamePass();
+
+            auth.ShowDialog();
+            bool cancel = auth.cancel;
+            if (!cancel)
+            {
+                String cmdString = "net use  \\\\" + newForm.GetIPTU() + "\\" +newForm.GetShareTU() +" /user:" + auth.GetName() + " " + auth.GetPass();
+                MessageBox.Show(cmdString);
+                ManagementClass processClass = new ManagementClass("Win32_Process");
+                object[] methodArgs = { cmdString, null, null, 0 };
+                object result = processClass.InvokeMethod("Create", methodArgs);
+            }
+            return cancel;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Form2 newForm = new Form2(this)
@@ -103,66 +141,138 @@ namespace MyFirstApp
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string str,str1;
-            str = textBox1.Text;
-
-            string[] mods = new string[100];
-
-            int k = 0;
-            Form2 newfrom = new Form2();
-            string pathMod = newfrom.GetModPath();
-                
-            string pathToCopy = @"D:\test\copyto\";
-
-            for (int i = 0; i <= (str.Length-1); i++)
-            {                
-                str1 = "";
-                while (checkNum(str[i]))
-                {                    
-                    str1 = str1 + str[i];
-                    i++;
-                    if (i==str.Length) { break; }
-                }
-                if (str1 != "")
-                {
-                    k++;
-                    if (str1.Length==1) { mods[k - 1] = "00" + str1; }
-
-                    else if(str1.Length == 2) { mods[k - 1] = "0" + str1; }
-
-                    else { mods[k - 1] = str1; }
-                    
-                }
-            }
-
-            MessageBox.Show("Количество модификация для копирования: "+k.ToString());
-
-            for (int i=0; i<=k-1; i++)
+            if (!MapDriveSST())
             {
-                string nameFile = "o3000" + mods[i];
-                for (int j=1; j<=2; j++)
-                {
-                    FileInfo fileInf7Z = new FileInfo(pathMod+nameFile + ".7z");
+                string str, str1;
+                str = textBox1.Text;
 
-                    FileInfo fileInfSGN = new FileInfo(pathMod + nameFile + ".sgn");
-                    if (fileInf7Z.Exists)
+                string[] mods = new string[100];
+
+                int k = 0;
+                Form2 newfrom = new Form2();
+                string pathMod = newfrom.GetModPath();
+
+                string pathToCopy = @"\\" + newfrom.GetIPSST() + @"\" + newfrom.GetShareSST() + @"\test\copyto\";
+
+                for (int i = 0; i <= (str.Length - 1); i++)
+                {
+                    str1 = "";
+                    while (checkNum(str[i]))
                     {
-                        fileInf7Z.CopyTo(pathToCopy+ nameFile + ".7z", true);
+                        str1 = str1 + str[i];
+                        i++;
+                        if (i == str.Length) { break; }
                     }
-                    if (fileInfSGN.Exists)
+                    if (str1 != "")
                     {
-                        fileInfSGN.CopyTo(pathToCopy + nameFile +".sgn" , true);
+                        k++;
+                        if (str1.Length == 1) { mods[k - 1] = "00" + str1; }
+
+                        else if (str1.Length == 2) { mods[k - 1] = "0" + str1; }
+
+                        else { mods[k - 1] = str1; }
+
                     }
-                    nameFile = "b3000" + mods[i];
-                }              
-                
+                }
+
+                MessageBox.Show("Количество модификация для копирования: " + k.ToString());
+                int numOfFiles = 0;
+                for (int i = 0; i <= k - 1; i++)
+                {
+                    string nameFile = "o3000" + mods[i];
+                    for (int j = 1; j <= 2; j++)
+                    {
+                        FileInfo fileInf7Z = new FileInfo(pathMod + nameFile + ".7z");
+
+                        FileInfo fileInfSGN = new FileInfo(pathMod + nameFile + ".sgn");
+                        if (fileInf7Z.Exists)
+                        {
+                            fileInf7Z.CopyTo(pathToCopy + nameFile + ".7z", true);
+                            numOfFiles++;
+                        }
+                        if (fileInfSGN.Exists)
+                        {
+                            fileInfSGN.CopyTo(pathToCopy + nameFile + ".sgn", true);
+                            numOfFiles++;
+                        }
+                        nameFile = "b3000" + mods[i];
+                    }
+
+                }
+                MessageBox.Show("Скопировано " + numOfFiles.ToString() + " файлов.");
+
             }
-           
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (!MapDriveTU())
+            {
+                string str, str1;
+                str = textBox1.Text;
+
+                string[] mods = new string[100];
+
+                int k = 0;
+                Form2 newfrom = new Form2();
+                string pathMod = newfrom.GetModPath();
+
+                string pathToCopy = @"\\" + newfrom.GetIPTU() + @"\" + newfrom.GetShareTU() + @"\test\copyto\";
+
+                for (int i = 0; i <= (str.Length - 1); i++)
+                {
+                    str1 = "";
+                    while (checkNum(str[i]))
+                    {
+                        str1 = str1 + str[i];
+                        i++;
+                        if (i == str.Length) { break; }
+                    }
+                    if (str1 != "")
+                    {
+                        k++;
+                        if (str1.Length == 1) { mods[k - 1] = "00" + str1; }
+
+                        else if (str1.Length == 2) { mods[k - 1] = "0" + str1; }
+
+                        else { mods[k - 1] = str1; }
+
+                    }
+                }
+
+                MessageBox.Show("Количество модификация для копирования: " + k.ToString());
+                int numOfFiles = 0;
+                for (int i = 0; i <= k - 1; i++)
+                {
+                    string nameFile = "o3000" + mods[i];
+                    for (int j = 1; j <= 2; j++)
+                    {
+                        FileInfo fileInf7Z = new FileInfo(pathMod + nameFile + ".7z");
+
+                        FileInfo fileInfSGN = new FileInfo(pathMod + nameFile + ".sgn");
+                        if (fileInf7Z.Exists)
+                        {
+                            fileInf7Z.CopyTo(pathToCopy + nameFile + ".7z", true);
+                            numOfFiles++;
+                        }
+                        if (fileInfSGN.Exists)
+                        {
+                            fileInfSGN.CopyTo(pathToCopy + nameFile + ".sgn", true);
+                            numOfFiles++;
+                        }
+                        nameFile = "b3000" + mods[i];
+                    }
+
+                }
+                MessageBox.Show("Скопировано " + numOfFiles.ToString() + " файлов.");
+
+            }
         }
     }
 }

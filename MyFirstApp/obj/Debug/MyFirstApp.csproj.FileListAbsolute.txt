@@ -9,3 +9,4 @@ D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.csproj.CoreCo
 D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.exe
 D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.pdb
 D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.Form2.resources
+D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.NamePass.resources

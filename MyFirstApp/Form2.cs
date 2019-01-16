@@ -52,7 +52,7 @@ namespace MyFirstApp
 
                 indexOfSubstring = indexOfSubstringEnd;
                 indexOfSubstringEnd = textFromFile.Length;
-                path_To_Mod = textFromFile.Substring(indexOfSubstring + subStrEnd.Length, indexOfSubstringEnd - indexOfSubstring - subStrBegin.Length - 2);
+                path_To_Mod = textFromFile.Substring(indexOfSubstring + subStrEnd.Length, indexOfSubstringEnd - indexOfSubstring - subStrBegin.Length-2);
 
                 // MessageBox.Show("Текст из файла: {0}"+ textFromFile);
 
@@ -60,11 +60,11 @@ namespace MyFirstApp
         }
         public void save_to_file()
         {
-            using (FileStream fstream = new FileStream(@"D:\test\settings.txt", FileMode.OpenOrCreate))
+            using (FileStream fstream = new FileStream(@"D:\test\settings.txt", FileMode.Create))
             {
                 string textToFile;
                 textToFile = "IP_TU=" + this.textBox1.Text + "\r\nIP_SST=" + this.textBox3.Text + "\r\nSHARE_TU=" +
-                    this.textBox2.Text + "\r\nSHARE_SST=" + this.textBox4.Text + "\r\nPATH_TO_MOD=" + this.textBox5.Text + "\r\n";
+                    this.textBox2.Text + "\r\nSHARE_SST=" + this.textBox4.Text + "\r\nPATH_TO_MOD=" + this.textBox5.Text;
                 // преобразуем строку в байты
                 byte[] array = System.Text.Encoding.Default.GetBytes(textToFile);
                 // запись массива байтов в файл
@@ -77,6 +77,12 @@ namespace MyFirstApp
         public Form2()
         {
             InitializeComponent();
+            parse_File();
+            this.textBox1.Text = this.ip_TU;
+            this.textBox2.Text = this.share_TU;
+            this.textBox3.Text = this.ip_SST;
+            this.textBox4.Text = this.share_SST;
+            this.textBox5.Text = this.path_To_Mod;
         }
         public Form2(Form1 form)
         {
@@ -104,10 +110,31 @@ namespace MyFirstApp
             return this.textBox5.Text;
 
         }
+        public string GetIPSST()
+        {
+            return this.textBox3.Text;
+
+        }
+        public string GetShareSST()
+        {
+            return this.textBox4.Text;
+
+        }
+        public string GetIPTU()
+        {
+            return this.textBox1.Text;
+
+        }
+        public string GetShareTU()
+        {
+            return this.textBox2.Text;
+
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.save_to_file(); 
+            this.save_to_file();
+            MessageBox.Show("Настройки сохранены");
 
         }
     }

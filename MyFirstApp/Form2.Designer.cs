@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Windows.Forms;
-
-namespace MyFirstApp
+﻿namespace MyFirstApp
 {
     partial class Form2
     {

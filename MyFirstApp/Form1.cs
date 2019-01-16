@@ -13,9 +13,20 @@ namespace MyFirstApp
     public partial class Form1 : Form
     {
         //Point moveStart;
+        //SortedSet<char> s1 = new SortedSet<char>();
         public Form1()
         {
             InitializeComponent();
+            //s1.Add('0');
+            //s1.Add('1');
+            //s1.Add('2');
+            //s1.Add('3');
+            //s1.Add('4');
+            //s1.Add('5');
+            //s1.Add('6');
+            //s1.Add('7');
+            //s1.Add('8');
+            //s1.Add('9');                  
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.BackColor = Color.Yellow;
             //Button button2 = new Button
@@ -32,6 +43,7 @@ namespace MyFirstApp
             //this.Load += Form1_Load;
             //this.MouseDown += Form1_MouseDown;
             //this.MouseMove += Form1_MouseMove;
+
 
         }
         //private void Form1_Load(object sender, EventArgs e)
@@ -79,10 +91,44 @@ namespace MyFirstApp
             
             newForm.Show();
         }
+        private bool checkNum(char ch)
+        {
+            bool flag1;
+            flag1 = false;
+            if (ch == '0' || ch == '1'|| ch == '2'|| ch == '3'|| ch == '4'|| ch == '5'|| 
+                ch == '6' || ch == '7' || ch == '8' || ch == '9') { flag1 = true; }        
+            return flag1;
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(textBox1.Text);
+            string str,str1;
+            str = textBox1.Text;
+            string[] mods = new string[100];
+            int k = 0;
+
+            for (int i = 0; i <= (str.Length-1); i++)
+            {                
+                str1 = "";
+                while (checkNum(str[i]))
+                {                    
+                    str1 = str1 + str[i];
+                    i++;
+                    if (i==str.Length) { break; }
+                }
+                if (str1 != "")
+                {
+                    k++;
+                    mods[k - 1] = str1;
+                }
+            }
+            MessageBox.Show("Количество модификация для копирования: "+k.ToString());
+
+            //for (int i=0; i<=k-1; i++)
+            //{
+            //    MessageBox.Show(mods[i]);
+            //}
+           
         }
 
         private void button2_Click(object sender, EventArgs e)

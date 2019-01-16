@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MyFirstApp
 {
@@ -104,8 +105,14 @@ namespace MyFirstApp
         {
             string str,str1;
             str = textBox1.Text;
+
             string[] mods = new string[100];
+
             int k = 0;
+            Form2 newfrom = new Form2();
+            string pathMod = newfrom.GetModPath();
+                
+            string pathToCopy = @"D:\test\copyto\";
 
             for (int i = 0; i <= (str.Length-1); i++)
             {                
@@ -119,15 +126,37 @@ namespace MyFirstApp
                 if (str1 != "")
                 {
                     k++;
-                    mods[k - 1] = str1;
+                    if (str1.Length==1) { mods[k - 1] = "00" + str1; }
+
+                    else if(str1.Length == 2) { mods[k - 1] = "0" + str1; }
+
+                    else { mods[k - 1] = str1; }
+                    
                 }
             }
+
             MessageBox.Show("Количество модификация для копирования: "+k.ToString());
 
-            //for (int i=0; i<=k-1; i++)
-            //{
-            //    MessageBox.Show(mods[i]);
-            //}
+            for (int i=0; i<=k-1; i++)
+            {
+                string nameFile = "o3000" + mods[i];
+                for (int j=1; j<=2; j++)
+                {
+                    FileInfo fileInf7Z = new FileInfo(pathMod+nameFile + ".7z");
+
+                    FileInfo fileInfSGN = new FileInfo(pathMod + nameFile + ".sgn");
+                    if (fileInf7Z.Exists)
+                    {
+                        fileInf7Z.CopyTo(pathToCopy+ nameFile + ".7z", true);
+                    }
+                    if (fileInfSGN.Exists)
+                    {
+                        fileInfSGN.CopyTo(pathToCopy + nameFile +".sgn" , true);
+                    }
+                    nameFile = "b3000" + mods[i];
+                }              
+                
+            }
            
         }
 

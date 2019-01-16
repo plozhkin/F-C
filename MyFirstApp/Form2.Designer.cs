@@ -1,4 +1,6 @@
-﻿namespace MyFirstApp
+﻿using System.IO;
+
+namespace MyFirstApp
 {
     partial class Form2
     {
@@ -6,6 +8,7 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+
 
         /// <summary>
         /// Clean up any resources being used.
@@ -28,6 +31,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            using (FileStream fstream = File.OpenRead(@"D:\Test\"))
+            {
+                // преобразуем строку в байты
+                byte[] array = new byte[fstream.Length];
+                // считываем данные
+                fstream.Read(array, 0, array.Length);
+                // декодируем байты в строку
+                string textFromFile = System.Text.Encoding.Default.GetString(array);
+                Console.WriteLine("Текст из файла: {0}", textFromFile);
+            }
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -172,6 +185,7 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(148, 40);
             this.textBox5.Name = "textBox5";
+            this.textBox5.Text = @"d:\test\rabis.mod\";
             this.textBox5.Size = new System.Drawing.Size(146, 20);
             this.textBox5.TabIndex = 4;
             // 

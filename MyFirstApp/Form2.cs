@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,6 +33,10 @@ namespace MyFirstApp
             this.Close();
         }
 
-        
+        public string GetModPath()
+        {
+            return this.textBox5.Text;
+
+        }
     }
 }

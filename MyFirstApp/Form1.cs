@@ -95,7 +95,7 @@ namespace MyFirstApp
             bool cancel = auth.cancel;
             if (!cancel)
             {
-                string cmdString = "net use  \\\\" + newForm.GetIPSST() + "\\"+newForm.GetShareSST()  +" /user:" + auth.GetName() + " " + auth.GetPass();
+                string cmdString = "net use  \\\\" + newForm.IPSST + "\\"+newForm.ShareSST  +" /user:" + auth.GetName() + " " + auth.GetPass();
                // MessageBox.Show(cmdString);
                 ManagementClass processClass = new ManagementClass("Win32_Process");
                 object[] methodArgs = { cmdString, null, null, 0 };
@@ -113,7 +113,7 @@ namespace MyFirstApp
             bool cancel = auth.cancel;
             if (!cancel)
             {
-                string cmdString = "net use  \\\\" + newForm.GetIPTU() + "\\" +newForm.GetShareTU() +" /user:" + auth.GetName() + " " + auth.GetPass();
+                string cmdString = "net use  \\\\" + newForm.IPTU + "\\" +newForm.ShareTU +" /user:" + auth.GetName() + " " + auth.GetPass();
                 //MessageBox.Show(cmdString);
                 ManagementClass processClass = new ManagementClass("Win32_Process");
                 object[] methodArgs = { cmdString, null, null, 0 };
@@ -142,43 +142,43 @@ namespace MyFirstApp
             if (!MapDriveSST())
             {
                 
-                string str, str1;
+                string str, modific;
                 str = textBox1.Text;
 
-                string[] mods = new string[100];
+                List<string> modifications = new List<string>();
 
-                int k = 0;
                 Form2 newfrom = new Form2();
-                string pathMod = newfrom.GetModPath();
+                string pathMod = newfrom.ModPath;
 
-                string pathToCopy = @"\\" + newfrom.GetIPSST() + @"\" + newfrom.GetShareSST() + @"\2regions\";
+                string pathToCopy = @"\\" + newfrom.IPSST + @"\" + newfrom.ShareSST + newfrom.SST_2reg;
 
-                for (int i = 0; i <= (str.Length - 1); i++)
+                for (int i = 0; i < str.Length; i++)
                 {
-                    str1 = "";
+                    modific = "";
                     while (checkNum(str[i]))
                     {
-                        str1 = str1 + str[i];
+                        modific = modific+ str[i];
                         i++;
                         if (i == str.Length) { break; }
                     }
-                    if (str1 != "")
+                    if (modific != "")
                     {
-                        k++;
-                        if (str1.Length == 1) { mods[k - 1] = "00" + str1; }
+                        if (modific.Length == 1) { modifications.Add("00" + modific); }
 
-                        else if (str1.Length == 2) { mods[k - 1] = "0" + str1; }
+                        else if (modific.Length == 2) { modifications.Add("0" + modific); }
 
-                        else { mods[k - 1] = str1; }
+                        else { modifications.Add(modific); }
 
                     }
                 }
 
+                int k = modifications.Count;
                 MessageBox.Show("Количество модификация для копирования: " + k.ToString());
                 int numOfFiles = 0;
-                for (int i = 0; i <= k - 1; i++)
+                
+                for (int i = 0; i < k ; i++)
                 {
-                    string nameFile = "o3000" + mods[i];
+                    string nameFile = "o3000" + modifications[i];
                     for (int j = 1; j <= 2; j++)
                     {
                         FileInfo fileInf7Z = new FileInfo(pathMod + nameFile + ".7z");
@@ -196,7 +196,7 @@ namespace MyFirstApp
                             fileInfSGN.CopyTo(pathToCopy + nameFile + ".sgn", true);
                             numOfFiles++;
                         }
-                        nameFile = "b3000" + mods[i];
+                        nameFile = "b3000" + modifications[i];
                     }
 
                 }
@@ -222,9 +222,9 @@ namespace MyFirstApp
 
                 int k = 0;
                 Form2 newfrom = new Form2();
-                string pathMod = newfrom.GetModPath();
+                string pathMod = newfrom.ModPath;
 
-                string pathToCopy = @"\\" + newfrom.GetIPTU() + @"\" + newfrom.GetShareTU() + @"\2regions\";
+                string pathToCopy = @"\\" + newfrom.IPTU + @"\" + newfrom.ShareTU + newfrom.TU_2reg;
 
                 for (int i = 0; i <= (str.Length - 1); i++)
                 {

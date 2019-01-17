@@ -13,18 +13,18 @@ namespace MyFirstApp
 {
     public partial class Form2 : Form
     {
-        public string ip_TU, ip_SST, share_TU, share_SST, path_To_Mod;
+        public string ip_TU, ip_SST, share_TU, share_SST, path_To_Mod, sst_2reg, tu_2reg;
         public void parse_File()
         {
             using (FileStream fstream = File.OpenRead("settings.cfg"))
             {
-                // преобразуем строку в байты
                 byte[] array = new byte[fstream.Length];
-                // считываем данные
+
                 fstream.Read(array, 0, array.Length);
-                // декодируем байты в строку
                 string textFromFile = System.Text.Encoding.Default.GetString(array);
+
                 fstream.Close();
+
                 string subStrBegin, subStrEnd;
                 subStrBegin = "IP_TU=";
                 int indexOfSubstring = textFromFile.IndexOf(subStrBegin);
@@ -46,13 +46,25 @@ namespace MyFirstApp
 
                 indexOfSubstring = indexOfSubstringEnd;
                 subStrBegin = "SHARE_SST=";
-                subStrEnd = "PATH_TO_MOD=";
+                subStrEnd = "TU_2REG=";
                 indexOfSubstringEnd = textFromFile.IndexOf(subStrEnd);
                 share_SST = textFromFile.Substring(indexOfSubstring + subStrBegin.Length, indexOfSubstringEnd - indexOfSubstring - subStrBegin.Length - 2);
 
                 indexOfSubstring = indexOfSubstringEnd;
+                subStrBegin = "TU_2REG=";
+                subStrEnd = "SST_2REG=";
+                indexOfSubstringEnd = textFromFile.IndexOf(subStrEnd);
+                tu_2reg = textFromFile.Substring(indexOfSubstring + subStrBegin.Length, indexOfSubstringEnd - indexOfSubstring - subStrBegin.Length - 2);
+
+                indexOfSubstring = indexOfSubstringEnd;
+                subStrBegin = "SST_2REG=";
+                subStrEnd = "PATH_TO_MOD=";
+                indexOfSubstringEnd = textFromFile.IndexOf(subStrEnd);
+                sst_2reg = textFromFile.Substring(indexOfSubstring + subStrBegin.Length, indexOfSubstringEnd - indexOfSubstring - subStrBegin.Length - 2);
+
+                indexOfSubstring = indexOfSubstringEnd;
                 indexOfSubstringEnd = textFromFile.Length;
-                path_To_Mod = textFromFile.Substring(indexOfSubstring + subStrEnd.Length, indexOfSubstringEnd - indexOfSubstring - subStrBegin.Length-2);
+                path_To_Mod = textFromFile.Substring(indexOfSubstring + subStrEnd.Length, indexOfSubstringEnd - indexOfSubstring - subStrEnd.Length);
 
                 // MessageBox.Show("Текст из файла: {0}"+ textFromFile);
 
@@ -64,7 +76,8 @@ namespace MyFirstApp
             {
                 string textToFile;
                 textToFile = "IP_TU=" + this.textBox1.Text + "\r\nIP_SST=" + this.textBox3.Text + "\r\nSHARE_TU=" +
-                    this.textBox2.Text + "\r\nSHARE_SST=" + this.textBox4.Text + "\r\nPATH_TO_MOD=" + this.textBox5.Text;
+                    this.textBox2.Text + "\r\nSHARE_SST=" + this.textBox4.Text + "\r\nTU_2REG=" + this.textBox6.Text+
+                     "\r\nSST_2REG=" + this.textBox7.Text + "\r\nPATH_TO_MOD=" + this.textBox5.Text;
                 // преобразуем строку в байты
                 byte[] array = System.Text.Encoding.Default.GetBytes(textToFile);
                 // запись массива байтов в файл
@@ -83,6 +96,8 @@ namespace MyFirstApp
             this.textBox3.Text = this.ip_SST;
             this.textBox4.Text = this.share_SST;
             this.textBox5.Text = this.path_To_Mod;
+            this.textBox6.Text = this.tu_2reg;
+            this.textBox7.Text = this.sst_2reg;
         }
         public Form2(Form1 form)
         {
@@ -93,7 +108,8 @@ namespace MyFirstApp
             this.textBox3.Text = this.ip_SST;
             this.textBox4.Text = this.share_SST;
             this.textBox5.Text = this.path_To_Mod;
-           // components.Add(this.textBox1);
+            this.textBox6.Text = this.tu_2reg;
+            this.textBox7.Text = this.sst_2reg;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -102,29 +118,56 @@ namespace MyFirstApp
             this.Dispose();
         }
 
-        public string GetModPath()
+        public string ModPath
         {
-            return this.textBox5.Text;
-
+            get
+            { 
+                return this.textBox5.Text;
+            }
+            
         }
-        public string GetIPSST()
+        public string IPSST
         {
-            return this.textBox3.Text;
-
+            get
+            {
+                return this.textBox3.Text;
+            }
         }
-        public string GetShareSST()
+        public string ShareSST
         {
-            return this.textBox4.Text;
-
+            get
+            {
+                return this.textBox4.Text;
+            }
         }
-        public string GetIPTU()
+        public string IPTU
         {
-            return this.textBox1.Text;
-
+            get
+            {
+                return this.textBox1.Text;
+            }
         }
-        public string GetShareTU()
+        public string ShareTU
         {
-            return this.textBox2.Text;
+            get
+            {
+                return this.textBox2.Text;
+            }
+        }
+        public string TU_2reg
+        {
+            get
+            {
+                return this.textBox6.Text;
+            }
+         
+        }
+        public string SST_2reg
+        {
+            get
+            {
+                return this.textBox7.Text;
+            }
 
         }
 

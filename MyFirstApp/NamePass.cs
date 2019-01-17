@@ -35,7 +35,6 @@ namespace MyFirstApp
         {
             this.cancel = true;
             this.Close();
-
         }
 
         private void NamePass_Load(object sender, EventArgs e)

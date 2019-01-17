@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -41,7 +42,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 389);
+            this.button1.Location = new System.Drawing.Point(12, 308);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 40);
             this.button1.TabIndex = 0;
@@ -51,7 +52,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(363, 389);
+            this.button2.Location = new System.Drawing.Point(321, 308);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 40);
             this.button2.TabIndex = 1;
@@ -65,14 +66,14 @@
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Location = new System.Drawing.Point(12, 203);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(439, 166);
+            this.groupBox1.Size = new System.Drawing.Size(397, 99);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Копировать";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(28, 58);
+            this.button3.Location = new System.Drawing.Point(26, 19);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(148, 57);
             this.button3.TabIndex = 0;
@@ -82,7 +83,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(247, 58);
+            this.button4.Location = new System.Drawing.Point(218, 19);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(155, 57);
             this.button4.TabIndex = 1;
@@ -95,7 +96,7 @@
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(439, 185);
+            this.groupBox2.Size = new System.Drawing.Size(397, 185);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Текст";
@@ -105,7 +106,7 @@
             this.textBox1.Location = new System.Drawing.Point(6, 19);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(427, 160);
+            this.textBox1.Size = new System.Drawing.Size(385, 160);
             this.textBox1.TabIndex = 0;
             // 
             // Form1
@@ -113,11 +114,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(463, 441);
+            this.ClientSize = new System.Drawing.Size(422, 357);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "F&C";

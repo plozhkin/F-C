@@ -95,11 +95,12 @@ namespace MyFirstApp
             bool cancel = auth.cancel;
             if (!cancel)
             {
-                String cmdString = "net use  \\\\" + newForm.GetIPSST() + "\\"+newForm.GetShareSST()  +" /user:" + auth.GetName() + " " + auth.GetPass();
-                MessageBox.Show(cmdString);
+                string cmdString = "net use  \\\\" + newForm.GetIPSST() + "\\"+newForm.GetShareSST()  +" /user:" + auth.GetName() + " " + auth.GetPass();
+               // MessageBox.Show(cmdString);
                 ManagementClass processClass = new ManagementClass("Win32_Process");
                 object[] methodArgs = { cmdString, null, null, 0 };
                 object result = processClass.InvokeMethod("Create", methodArgs);
+                //MessageBox.Show(result.ToString());
             }
             return cancel;
         }
@@ -112,8 +113,8 @@ namespace MyFirstApp
             bool cancel = auth.cancel;
             if (!cancel)
             {
-                String cmdString = "net use  \\\\" + newForm.GetIPTU() + "\\" +newForm.GetShareTU() +" /user:" + auth.GetName() + " " + auth.GetPass();
-                MessageBox.Show(cmdString);
+                string cmdString = "net use  \\\\" + newForm.GetIPTU() + "\\" +newForm.GetShareTU() +" /user:" + auth.GetName() + " " + auth.GetPass();
+                //MessageBox.Show(cmdString);
                 ManagementClass processClass = new ManagementClass("Win32_Process");
                 object[] methodArgs = { cmdString, null, null, 0 };
                 object result = processClass.InvokeMethod("Create", methodArgs);
@@ -123,11 +124,8 @@ namespace MyFirstApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 newForm = new Form2(this)
-            {
-                StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-            };
-            
+            Form2 newForm = new Form2(this);
+            newForm.StartPosition = FormStartPosition.CenterScreen;
             newForm.Show();
         }
         private bool checkNum(char ch)
@@ -143,6 +141,7 @@ namespace MyFirstApp
         {
             if (!MapDriveSST())
             {
+                
                 string str, str1;
                 str = textBox1.Text;
 
@@ -152,7 +151,7 @@ namespace MyFirstApp
                 Form2 newfrom = new Form2();
                 string pathMod = newfrom.GetModPath();
 
-                string pathToCopy = @"\\" + newfrom.GetIPSST() + @"\" + newfrom.GetShareSST() + @"\test\copyto\";
+                string pathToCopy = @"\\" + newfrom.GetIPSST() + @"\" + newfrom.GetShareSST() + @"\2regions\";
 
                 for (int i = 0; i <= (str.Length - 1); i++)
                 {
@@ -183,8 +182,10 @@ namespace MyFirstApp
                     for (int j = 1; j <= 2; j++)
                     {
                         FileInfo fileInf7Z = new FileInfo(pathMod + nameFile + ".7z");
-
+                        //MessageBox.Show("Путь до 7зип " + pathMod + nameFile + ".7z");
                         FileInfo fileInfSGN = new FileInfo(pathMod + nameFile + ".sgn");
+                        //MessageBox.Show("Путь до сгн " + pathMod + nameFile + ".sgn");
+                       // MessageBox.Show("Exist 7z" + fileInf7Z.Exists);
                         if (fileInf7Z.Exists)
                         {
                             fileInf7Z.CopyTo(pathToCopy + nameFile + ".7z", true);
@@ -223,7 +224,7 @@ namespace MyFirstApp
                 Form2 newfrom = new Form2();
                 string pathMod = newfrom.GetModPath();
 
-                string pathToCopy = @"\\" + newfrom.GetIPTU() + @"\" + newfrom.GetShareTU() + @"\test\copyto\";
+                string pathToCopy = @"\\" + newfrom.GetIPTU() + @"\" + newfrom.GetShareTU() + @"\2regions\";
 
                 for (int i = 0; i <= (str.Length - 1); i++)
                 {

@@ -16,7 +16,7 @@ namespace MyFirstApp
         public string ip_TU, ip_SST, share_TU, share_SST, path_To_Mod;
         public void parse_File()
         {
-            using (FileStream fstream = File.OpenRead(@"D:\Test\settings.txt"))
+            using (FileStream fstream = File.OpenRead("settings.cfg"))
             {
                 // преобразуем строку в байты
                 byte[] array = new byte[fstream.Length];
@@ -60,7 +60,7 @@ namespace MyFirstApp
         }
         public void save_to_file()
         {
-            using (FileStream fstream = new FileStream(@"D:\test\settings.txt", FileMode.Create))
+            using (FileStream fstream = new FileStream("settings.cfg", FileMode.Create))
             {
                 string textToFile;
                 textToFile = "IP_TU=" + this.textBox1.Text + "\r\nIP_SST=" + this.textBox3.Text + "\r\nSHARE_TU=" +
@@ -93,16 +93,13 @@ namespace MyFirstApp
             this.textBox3.Text = this.ip_SST;
             this.textBox4.Text = this.share_SST;
             this.textBox5.Text = this.path_To_Mod;
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-           // this.BackColor = Color.Black;
+           // components.Add(this.textBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.Dispose();
         }
 
         public string GetModPath()

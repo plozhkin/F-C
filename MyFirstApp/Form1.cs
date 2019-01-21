@@ -14,77 +14,11 @@ namespace MyFirstApp
 {
     public partial class Form1 : Form
     {
-        //Point moveStart;
-        //SortedSet<char> s1 = new SortedSet<char>();
+        
         public Form1()
         {
             InitializeComponent();
-            //s1.Add('0');
-            //s1.Add('1');
-            //s1.Add('2');
-            //s1.Add('3');
-            //s1.Add('4');
-            //s1.Add('5');
-            //s1.Add('6');
-            //s1.Add('7');
-            //s1.Add('8');
-            //s1.Add('9');                  
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.BackColor = Color.Yellow;
-            //Button button2 = new Button
-            //{
-            //    Location = new Point
-            //    {
-            //        X = this.Width / 2,
-            //        Y = this.Height / 2
-            //    }
-            //};
-            //button2.Text = "Close";
-            //button2.Click += button2_Click;
-            //this.Controls.Add(button2);
-            //this.Load += Form1_Load;
-            //this.MouseDown += Form1_MouseDown;
-            //this.MouseMove += Form1_MouseMove;
-
-
-        }
-        //private void Form1_Load(object sender, EventArgs e)
-        //{
-        //    System.Drawing.Drawing2D.GraphicsPath myPath = new System.Drawing.Drawing2D.GraphicsPath();
-        //    // создаем эллипс с высотой и шириной формы
-        //    myPath.AddEllipse(0, 0, this.Width, this.Height);
-        //    // создаем с помощью элипса ту область формы, которую мы хотим видеть
-        //    Region myRegion = new Region(myPath);
-        //    // устанавливаем видимую область
-        //    this.Region = myRegion;
-        //}
-
-        //private void Form1_MouseDown(object sender, MouseEventArgs e)
-        //{
-        //    // если нажата левая кнопка мыши
-        //    if (e.Button == MouseButtons.Left)
-        //    {
-        //        moveStart = new Point(e.X, e.Y);
-        //    }
-        //}
-        //private void Form1_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    // если нажата левая кнопка мыши
-        //    if ((e.Button & MouseButtons.Left) != 0)
-        //    {
-        //        // получаем новую точку положения формы
-        //        Point deltaPos = new Point(e.X - moveStart.X, e.Y - moveStart.Y);
-        //        // устанавливаем положение формы
-        //        this.Location = new Point(this.Location.X + deltaPos.X,
-        //          this.Location.Y + deltaPos.Y);
-        //    }
-        //}
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    this.Close();
-        //}
-
-        
+        }             
 
         static bool MapDriveSST()
         {
@@ -95,12 +29,10 @@ namespace MyFirstApp
             bool cancel = auth.cancel;
             if (!cancel)
             {
-                string cmdString = "net use  \\\\" + newForm.IPSST + "\\"+newForm.ShareSST  +" /user:" + auth.GetName() + " " + auth.GetPass();
-               // MessageBox.Show(cmdString);
+                string cmdString = "net use  \\\\" + newForm.ip_SST + "\\"+newForm.share_SST  +" /user:" + auth.GetName() + " " + auth.GetPass();
                 ManagementClass processClass = new ManagementClass("Win32_Process");
                 object[] methodArgs = { cmdString, null, null, 0 };
                 object result = processClass.InvokeMethod("Create", methodArgs);
-                //MessageBox.Show(result.ToString());
             }
             return cancel;
         }
@@ -113,7 +45,7 @@ namespace MyFirstApp
             bool cancel = auth.cancel;
             if (!cancel)
             {
-                string cmdString = "net use  \\\\" + newForm.IPTU + "\\" +newForm.ShareTU +" /user:" + auth.GetName() + " " + auth.GetPass();
+                string cmdString = "net use  \\\\" + newForm.ip_TU + "\\" +newForm.share_TU+" /user:" + auth.GetName() + " " + auth.GetPass();
                 //MessageBox.Show(cmdString);
                 ManagementClass processClass = new ManagementClass("Win32_Process");
                 object[] methodArgs = { cmdString, null, null, 0 };
@@ -124,10 +56,10 @@ namespace MyFirstApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 newForm = new Form2(this);
-            newForm.StartPosition = FormStartPosition.CenterScreen;
+            Form2 newForm = new Form2();            
             newForm.Show();
         }
+
         private bool checkNum(char ch)
         {
             bool flag1;
@@ -148,11 +80,11 @@ namespace MyFirstApp
                 List<string> modifications = new List<string>();
 
                 Form2 newfrom = new Form2();
-                string pathMod = newfrom.ModPath;
+                string pathMod = newfrom.path_To_Mod;
 
-                string pathToCopy = @"\\" + newfrom.IPSST + @"\" + newfrom.ShareSST + newfrom.SST_2reg;
+                string pathToCopy = @"\\" + newfrom.ip_SST + @"\" + newfrom.share_SST+ newfrom.sst_2reg;
 
-                for (int i = 0; i < str.Length; i++)
+                for (short i = 0; i < str.Length; i++)
                 {
                     modific = "";
                     while (checkNum(str[i]))
@@ -174,12 +106,12 @@ namespace MyFirstApp
 
                 int k = modifications.Count;
                 MessageBox.Show("Количество модификация для копирования: " + k.ToString());
-                int numOfFiles = 0;
+                short numOfFiles = 0;
                 
                 for (int i = 0; i < k ; i++)
                 {
                     string nameFile = "o3000" + modifications[i];
-                    for (int j = 1; j <= 2; j++)
+                    for (byte j = 1; j <= 2; j++)
                     {
                         FileInfo fileInf7Z = new FileInfo(pathMod + nameFile + ".7z");
                         //MessageBox.Show("Путь до 7зип " + pathMod + nameFile + ".7z");
@@ -220,11 +152,11 @@ namespace MyFirstApp
 
                 string[] mods = new string[100];
 
-                int k = 0;
+                short k = 0;
                 Form2 newfrom = new Form2();
-                string pathMod = newfrom.ModPath;
+                string pathMod = newfrom.path_To_Mod;
 
-                string pathToCopy = @"\\" + newfrom.IPTU + @"\" + newfrom.ShareTU + newfrom.TU_2reg;
+                string pathToCopy = @"\\" + newfrom.ip_TU + @"\" + newfrom.share_TU+ newfrom.tu_2reg;
 
                 for (int i = 0; i <= (str.Length - 1); i++)
                 {
@@ -248,11 +180,11 @@ namespace MyFirstApp
                 }
 
                 MessageBox.Show("Количество модификация для копирования: " + k.ToString());
-                int numOfFiles = 0;
-                for (int i = 0; i <= k - 1; i++)
+                short numOfFiles = 0;
+                for (short i = 0; i <= k - 1; i++)
                 {
                     string nameFile = "o3000" + mods[i];
-                    for (int j = 1; j <= 2; j++)
+                    for (byte j = 1; j <= 2; j++)
                     {
                         FileInfo fileInf7Z = new FileInfo(pathMod + nameFile + ".7z");
 
@@ -276,4 +208,6 @@ namespace MyFirstApp
             }
         }
     }
+
+   
 }

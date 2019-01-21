@@ -10,3 +10,6 @@ D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.exe
 D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.pdb
 D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.Form2.resources
 D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.NamePass.resources
+D:\Programming\FirstApp\MyFirstApp\MyFirstApp\bin\Debug\System.Net.Http.dll
+D:\Programming\FirstApp\MyFirstApp\MyFirstApp\bin\Debug\System.Net.Http.xml
+D:\Programming\FirstApp\MyFirstApp\MyFirstApp\obj\Debug\MyFirstApp.csproj.CopyComplete

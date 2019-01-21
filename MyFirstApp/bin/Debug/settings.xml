@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ArrayOfSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Settings>
+    <Ip_Adress>10.33.64.199</Ip_Adress>
+    <Share>rabis-np</Share>
+    <Path_To_2regions>\2regions\</Path_To_2regions>
+    <Debug>true</Debug>
+    <Path_To_Mod>w:\dataput\rabis.mod\np30\</Path_To_Mod>
+    <Type_Of_Sys>TU</Type_Of_Sys>
+  </Settings>
+  <Settings>
+    <Ip_Adress>127.0.0.0</Ip_Adress>
+    <Share>rabis-np</Share>
+    <Path_To_2regions>\2regions\</Path_To_2regions>
+    <Debug>true</Debug>
+    <Path_To_Mod>w:\dataput\rabis.mod\np30\</Path_To_Mod>
+    <Type_Of_Sys>SST</Type_Of_Sys>
+  </Settings>
+</ArrayOfSettings>
